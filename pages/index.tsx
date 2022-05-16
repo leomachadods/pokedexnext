@@ -1,3 +1,12 @@
+import Link from "next/link";
+import Sobre from "./sobre";
+import Navbar from '../Components/Navbar';
+import styles from '../styles/Main.module.css'
+
+// export async function getStaticPaths() {
+//   const resp = await fetch('http://pokeapi.co/media/sprites/pokemon/${pokemonIndex}.png')
+// }
+
 export async function getStaticProps() {
   const resp = await fetch("https://pokeapi.co/api/v2/pokedex/2");
   const data = await resp.json();
@@ -18,18 +27,22 @@ export async function getStaticProps() {
     },
   };
 }
+
 function Main({ name, url }) {
   return (
+    <>
+     <Navbar></Navbar>
     <div>
-      <h1>Pokédex - leomachadods</h1>
+     
       <ul>
         {name.map((name: string, index: number) => (
-          <li key={index}>
-            <a href={url[index]}>{name}</a>
+          <li className={styles.list}key={index}>
+            <a className={styles.a}href={url[index]}>{name}</a>
           </li>
         ))}
       </ul>
     </div>
+    </>
   );
 }
 
